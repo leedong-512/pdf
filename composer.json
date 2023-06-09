@@ -1,0 +1,21 @@
+{
+    "name": "leedong/pdf",
+    "description": "pdf",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lee\\pdf\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "leedong",
+            "email": "leedd521@163.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
