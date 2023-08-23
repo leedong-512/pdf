@@ -33,7 +33,7 @@ class Pdf
         if($status !== 0 || $out[0] != "ok") {
             throw new Exception("pdf split failure", 500);
         }
-        $temp_list = scandir($this->outPath);
+        $temp_list = $this->sort($this->outPath);
         $base64Contents = [];
         foreach ($temp_list as $file) {
             if ($file != ".." && $file != ".") {
@@ -44,6 +44,30 @@ class Pdf
         }
 
         return $base64Contents;
+    }
+
+    /**
+     * Notes:按照拆分的顺序进行重新遍历数据
+     * User: LiDong
+     * Date: 2023/8/23
+     * Time: 11:12
+     * @param $outPath
+     * @return array
+     */
+    private function sort($outPath): array
+    {
+        $temp_list = scandir($outPath);
+        $newList = [];
+        foreach ($temp_list as &$value) {
+            if($value == ".." || $value == ".") {
+                continue;
+            }
+            $keyStr = substr($value, strrpos($value, '_') + 1);
+            $key = explode('.', $keyStr);
+            $newList[--$key[0]] = $value;
+        }
+        ksort($newList);
+        return $newList;
     }
 
     /**
