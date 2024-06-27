@@ -16,10 +16,9 @@ class Excel
 
     public function __construct($config)
     {
-        $this->inputPath = str_replace('\\', '/', rtrim($config['inputPath'], '/') . DIRECTORY_SEPARATOR);
-        $this->outPath = str_replace('\\', '/', rtrim($config['outPath'], '/') . DIRECTORY_SEPARATOR);
+        $this->inputPath = str_replace('\\', '/', rtrim($config['inputPath'], '/'));
+        $this->outPath = str_replace('\\', '/', rtrim($config['outPath'], '/'));
         $this->subcommands = $config['subcommands'];
-        $this->mkdir($this->outPath);
         $this->command = $this->getCommand();
         $this->dirPermits($this->command); //检测&修改脚本执行权限
 
