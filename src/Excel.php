@@ -29,7 +29,7 @@ class Excel
      * 导出xlsx
      * @throws Exception
      */
-    public function export() :string
+    public function export() :bool
     {
         if(!$this->command) {
             throw new Exception("This system is not supported:" . PHP_OS, 400);
@@ -40,7 +40,7 @@ class Excel
             throw new Exception("Failed to generate xlsx file", 500);
         }
 
-        return $this->outPath;
+        return true;
     }
 
     public function import($file)
