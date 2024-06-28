@@ -20,8 +20,6 @@ class Excel
         $this->outPath = str_replace('\\', '/', rtrim($config['outPath'], '/'));
         $this->subcommands = $config['subcommands'];
         $this->command = $this->getCommand();
-        $this->dirPermits($this->command); //检测&修改脚本执行权限
-
     }
 
     /**
@@ -98,6 +96,13 @@ class Excel
             if(!is_dir($dir)) {
                 mkdir($dir, 0777, true);chmod($dir, 0777);
             }
+        }
+    }
+
+    //删除文件
+    public function delFile($file) {
+        if(file_exists($file)) {
+            unlink($file);
         }
     }
 
