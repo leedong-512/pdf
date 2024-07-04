@@ -101,8 +101,11 @@ class Excel
 
     //删除文件
     public function delFile($file) {
-        if(file_exists($file)) {
-            unlink($file);
+        $files = func_get_args();
+        foreach ($files as $file) {
+            if(file_exists($file)) {
+                unlink($file);
+            }
         }
     }
 
