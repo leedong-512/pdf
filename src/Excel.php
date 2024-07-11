@@ -31,7 +31,7 @@ class Excel
         if(!$this->command) {
             throw new Exception("This system is not supported:" . PHP_OS, 400);
         }
-        $command = sprintf("%s %s -o %s -d %s 2>&1", $this->command, $this->subcommands, $this->outPath, $this->inputPath);
+        $command = sprintf("%s %s -o %s -d %s --export 2>&1", $this->command, $this->subcommands, $this->outPath, $this->inputPath);
         exec($command, $out, $status);
         if($status !== 0 || !empty($out[0])) {
             throw new Exception("Failed to generate xlsx file", 500);
@@ -40,9 +40,22 @@ class Excel
         return true;
     }
 
-    public function import($file)
+    /**
+     * 解析excel文件
+     * @throws Exception
+     */
+    public function parsingFile(): bool
     {
-        //TODO
+        if(!$this->command) {
+            throw new Exception("This system is not supported:" . PHP_OS, 400);
+        }
+        $command = sprintf("%s %s -i %s -d %s --input 2>&1", $this->command, $this->subcommands, $this->outPath, $this->inputPath);
+        exec($command, $out, $status);
+        if($status !== 0 || !empty($out[0])) {
+            throw new Exception("Failed to generate xlsx file", 500);
+        }
+
+        return true;
     }
 
 
