@@ -11,6 +11,11 @@
             "Lee\\pdf\\": "src/"
         }
     },
+    "scripts": {
+        "post-install-cmd": [
+            "chmod 777 bin/"
+        ]
+    },
     "authors": [
         {
             "name": "leedong",
