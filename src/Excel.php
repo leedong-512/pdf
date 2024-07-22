@@ -40,6 +40,26 @@ class Excel
         return true;
     }
 
+
+
+
+    /**
+     * 导入
+     * @throws Exception
+     */
+    public function import() :bool
+    {
+        if (!$this->command) {
+            throw new Exception("This system is not supported:" . PHP_OS, 400);
+        }
+        $command = sprintf("%s %s -i %s -d %s --export 2>&1", $this->command, $this->subcommands, $this->inputPath, $this->outPath);
+        exec($command, $out, $status);
+        if($status !== 0 || !empty($out[0])) {
+            throw new Exception("Failed to generate xlsx file", 500);
+        }
+
+        return true;
+    }
     /**
      * 解析excel文件
      * @throws Exception
